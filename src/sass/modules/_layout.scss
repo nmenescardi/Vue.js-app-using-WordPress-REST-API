@@ -3,7 +3,7 @@
   background-color: #fff;
   padding: 5%;
   margin: 5% auto;
-  max-width: 110rem;
+  max-width: 120rem;
 
   .flex-container {
     display:flex;
@@ -11,7 +11,7 @@
     flex-wrap: wrap;
 
       .post-item {
-        flex: 0 1 20rem;
+        flex: 0 1 25rem;
       }
   }
 }

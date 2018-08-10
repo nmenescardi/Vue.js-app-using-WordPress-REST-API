@@ -3,7 +3,7 @@
     <div class="flex-container post-list">
       <article v-for="post in posts" :key="post.id" class="post-item">
         <div class="post-content">
-          <h2>{{ post.title.rendered }}</h2>
+          <h2 class="post-title">{{ post.title.rendered }}</h2>
           <img :src="imgData[post.id]" width="450" height="250"/>
           <p v-html="post.excerpt.rendered"></p>
         </div>
