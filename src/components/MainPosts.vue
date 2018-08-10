@@ -22,14 +22,16 @@ export default {
   },
   data () {
     return {
-      posts: [],
-      imgData: [],
+      posts: {},
+      imgData: {},
+      categories: {},
       postsUrl: process.env.ROOT_API + '/wp-json/wp/v2/posts',
       postsData: {
         per_page: 10,
         page: 1
       },
-      imgUrl: process.env.ROOT_API + '/wp-json/wp/v2/media/'
+      imgUrl: process.env.ROOT_API + '/wp-json/wp/v2/media/',
+      categoriesUrl: process.env.ROOT_API + '/wp-json/wp/v2/categories'
     }
   },
   methods: {
@@ -52,6 +54,16 @@ export default {
                 })
             }
           }
+
+          axios.get(this.categoriesUrl)
+            .then((responseCategories) => {
+              for (let i = 0; i < responseCategories.data.length; i++) {
+                Vue.set(this.categories, responseCategories.data[i].id, responseCategories.data[i].name)
+              }
+            })
+            .catch((error) => {
+              console.log(error)
+            })
         })
         .catch((error) => {
           console.log(error)
