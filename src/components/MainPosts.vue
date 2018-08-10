@@ -46,7 +46,6 @@ export default {
               axios.get(this.imgUrl + featuredMedia)
                 .then((responseImg) => {
                   Vue.set(this.imgData, postId, responseImg.data.source_url)
-                   console.log(responseImg.data.source_url)
                 })
                 .catch((error) => {
                   console.log(error)
