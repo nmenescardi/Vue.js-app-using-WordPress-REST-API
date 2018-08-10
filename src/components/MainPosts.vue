@@ -4,8 +4,8 @@
       <article v-for="post in posts" :key="post.id" class="post">
         <div class="post-content">
           <h2>{{ post.title.rendered }}</h2>
-          <h2>{{ imgData['1'] }}</h2>
-          <img :src="imgData[post.id]" width="150" height="150"/>
+          <img :src="imgData[post.id]" width="450" height="250"/>
+          <p v-html="post.excerpt.rendered"></p>
         </div>
       </article>
     </div>
@@ -14,6 +14,7 @@
 
 <script>
 import axios from 'axios'
+import Vue from 'vue'
 export default {
   name: 'MainPosts',
   mounted () {
@@ -21,7 +22,7 @@ export default {
   },
   data () {
     return {
-      posts: '',
+      posts: [],
       imgData: [],
       postsUrl: process.env.ROOT_API + '/wp-json/wp/v2/posts',
       postsData: {
@@ -39,21 +40,18 @@ export default {
           for (let post in this.posts) {
             let featuredMedia = this.posts[post].featured_media
             let postId = this.posts[post].id
-            var imageSrc = ''
-            this.imgData[postId] = 'https://widgetsdataifx.blob.core.windows.net/widgetsdataifx/Content/themes/Davivienda/images/loading_spinner.gif'
+            Vue.set(this.imgData, postId, 'https://widgetsdataifx.blob.core.windows.net/widgetsdataifx/Content/themes/Davivienda/images/loading_spinner.gif')
 
             if (featuredMedia && featuredMedia !== '' && postId && postId !== '') {
               axios.get(this.imgUrl + featuredMedia)
                 .then((responseImg) => {
-                  imageSrc = responseImg.data.source_url
-                  console.log(responseImg.data.source_url)
+                  Vue.set(this.imgData, postId, responseImg.data.source_url)
+                   console.log(responseImg.data.source_url)
                 })
                 .catch((error) => {
                   console.log(error)
                 })
             }
-
-            this.imgData[postId] = imageSrc
           }
         })
         .catch((error) => {
