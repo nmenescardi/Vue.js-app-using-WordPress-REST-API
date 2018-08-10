@@ -4,7 +4,10 @@
       <article v-for="post in posts" :key="post.id" class="post-item">
         <div class="post-content">
           <h2 class="post-title">{{ post.title.rendered }}</h2>
-          <img :src="imgData[post.id]" width="450" height="250"/>
+          <div class="featured-image-wrapper">
+            <img :src="imgData[post.id]" width="450" height="250"/>
+            <small>{{ categories[post.categories] }}</small>
+          </div>
           <p v-html="post.excerpt.rendered"></p>
         </div>
       </article>

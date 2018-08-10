@@ -9,5 +9,20 @@
       line-height: 1.4;
       margin-bottom: 1rem;
     }
+
+    .featured-image-wrapper {
+      position: relative;
+
+      small{
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        color: #ededed;
+        font-weight: 500;
+        font-size: 1rem;
+        background-color: var(--color-primary-dark);
+        padding: 0.5rem 1rem;
+      }
+    }
   }
 }
